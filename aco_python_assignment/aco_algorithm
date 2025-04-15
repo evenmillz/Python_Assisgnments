@@ -2,18 +2,18 @@ import numpy as np
 
 # Define the distance matrix
 distance_matrix = np.array([
-    [0, 2, 4, 3, 5],
-    [2, 0, 6, 7, 8],
-    [4, 6, 0, 1, 3],
-    [3, 7, 1, 0, 2],
-    [5, 8, 3, 2, 0]
+    [3, 5, 7, 9, 0],
+    [2, 4, 6, 8, 0],
+    [1, 3, 4, 7, 8],
+    [5, 8, 2, 9, 1],
+    [4, 6, 3, 0, 0]
 ])
 
 # Number of cities
 num_cities = distance_matrix.shape[0]
 
 # Number of ants
-num_ants = 10
+num_ants = 77
 
 def ant_colony_optimization(num_iterations):
     # Initialize pheromone level matrix
@@ -29,6 +29,7 @@ def ant_colony_optimization(num_iterations):
 # Initialize best path and distance
     best_distance = float('inf')
     best_path = []
+    best_iteration = -1 # Initialize the best_iteration variable
 
     for iteration in range(num_iterations):
         # Initialize ant paths and distances
@@ -74,13 +75,15 @@ def ant_colony_optimization(num_iterations):
         if ant_distances[min_distance_idx] < best_distance:
             best_distance = ant_distances[min_distance_idx]
             best_path = ant_paths[min_distance_idx]
+            best_iteration = iteration # Update the best_iteration
 
-    return best_path, best_distance
+    return best_path, best_distance, best_iteration
 
 # Run the Ant Colony Optimization alogorithm
-num_iterations = 100 # Number of iterations
-best_path, best_distance = ant_colony_optimization(num_iterations)
+num_iterations = 57 # Number of iterations
+best_path, best_distance, best_iteration = ant_colony_optimization(num_iterations)
 
 # Display the best path and distance
 print("Here is the best path:", best_path)
-print("Here is the best distance:", best_distance)            
+print("Here is the best distance:", best_distance)
+print("Iteration with the best distance:", best_iteration) # New line           
