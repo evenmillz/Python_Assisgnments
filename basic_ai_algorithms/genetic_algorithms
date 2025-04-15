@@ -38,7 +38,7 @@ def crossover(parents):
         else:
             offspring += parents[1][i]
     return offspring
-
+          
 # Mutate offspring
 def mutate(offspring):
     mutated_offspring = ""
