@@ -48,6 +48,45 @@ def create_tabular_dataset(bucket_name, dataset_path):
     dataset = aiplatform.TabularDataset.create(display_name="my_dataset", gcs_source=gcs_source_uri)
     print("Tabular dataset created:", dataset.display_name)
 
+# Analyze the dataset
+def analyze_dataset(bucket_name, dataset_path):
+    """Analyze the dataset."""
+     # This code was in the hint but is incorrect
+    # It throws an error due to incorrect parameters
+    # It should be aiplatform.TabularDataset.create(*parameters*)
+    dataset = aiplatform.TabularDataset(
+        project=PROJECT_ID,
+        location=REGION,
+        display_name="my_dataset",
+        gcs_source=f"gs://{bucket_name}/{os.path.basename(dataset_path)}",
+    )
+    analysis = dataset.analyze()
+    print("Dataset analysis results:")
+    print(analysis)
+
+
+
+    # This code is to compare the results of two different ways of writing the same code
+    # dataset1 = aiplatform.TabularDataset.create(
+    #     project=PROJECT_ID,
+    #     location=REGION,
+    #     display_name="my_dataset_analysis",
+    #     gcs_source=f"gs://{bucket_name}/{os.path.basename(dataset_path)}",
+    # )
+
+    # analysis1 = dataset1.analyze()
+    # print("Dataset1 analysis results:")
+    # print(analysis1)
+
+    # dataset2 = create_tabular_dataset(BUCKET_NAME, DATASET_PATH)
+    # analysis2 = dataset2.analyze()
+    # print("Dataset2 analysis results:")
+    # print(analysis2)
+
+    # if( analysis1 == analysis2 ):
+    #     print("The datasets are identical.")
+
+
 # Main function
 def main():
     # Create a new bucket
@@ -58,6 +97,9 @@ def main():
 
     # Create a tabular dataset in Vertex AI
     create_tabular_dataset(BUCKET_NAME, DATASET_PATH)
+
+    # Analyze a tabular dataset in Vertex AI
+    analyze_dataset(BUCKET_NAME, DATASET_PATH)
 
 # Execute the main function
 if __name__ == "__main__":
