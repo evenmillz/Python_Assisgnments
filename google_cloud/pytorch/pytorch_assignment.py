@@ -31,6 +31,11 @@ class NeuralNetwork(nn.Module):
         super(NeuralNetwork, self).__init__()
         self.fc1 = nn.Linear(10, 5)  # First fully connected layer
         self.fc2 = nn.Linear(5, 2)    # Second fully connected layer
+        # Defines a linear layer that transforms input data from 10 features to 20 features
+        self.fc1 = nn.Linear(10, 20)
+        # Defines a linear layer that transforms data from 20 features to 2 output classes
+        self.fc2 = nn.Linear(20, 2)
+
         self.relu = nn.ReLU()
 
     def forward(self, x):
@@ -64,3 +69,41 @@ for name, param in model.named_parameters():
         print(f"{name}: {param.data}")
 
 print(f"Loss: {loss.item()}")  # Print the loss value
+
+
+# New function to calculate accuracy
+def calculate_accuracy(output, target):
+    """Calculate accuracy of the model's predictions."""
+    _, predicted = torch.max(output, 1)  # Get the index of the max log-probability
+    correct = (predicted == target).sum().item()  # Count correct predictions
+    accuracy = correct / target.size(0)  # Calculate accuracy
+    return accuracy
+
+# Calculate and print accuracy
+target = torch.tensor([10])  # Assuming the target class is 10
+accuracy = calculate_accuracy(output, target)
+print(f"Accuracy: {accuracy * 100:.2f}%")  # Print accuracy as a percentage
+
+
+# Train the model more because the model is not trained enough and yields a 0.00% accuracy
+
+# Add more data points
+input_data = torch.randn(10, 10) # 10 samples, 10 features
+target = torch.randint(0, 2, (10,)) # 10 class labels (0 or 1)
+
+# Run a training loop for multiple epochs
+for epoch in range(100):  # Train for 100 epochs
+    optimizer.zero_grad() # Zero the gradients before each epoch
+    output = model(input_data) # Forward pass
+    loss = criterion(output, target) # Use the full target batch
+    loss.backward() # Backward pass
+
+    # See traiining progress
+    if epoch % 10 == 0:
+        print(f"Epoch {epoch}, Loss: {loss.item():.4f}")
+    
+    optimizer.step() # Update model parameters
+
+# Check accuracy after training
+accuracy = calculate_accuracy(output, target)
+print(f"Final Accuracy: {accuracy * 100:.2f}%")
