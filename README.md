@@ -29,7 +29,7 @@ I’ve intentionally structured this repo not just to meet requirements but to r
 ## Approach
 
 - **Every challenge is original.**
-- **I don't reuse generic code — all solutions are uniquely written and aligned to my learning journey.**
+- **I don't reuse generic code. All solutions are uniquely written and aligned to my learning journey.**
 - **Where applicable, I add personal twists, symbolic elements, or advanced logic.**
 
 ---
